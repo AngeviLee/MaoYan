@@ -4,15 +4,23 @@
 	<navigator url="./index" hover-class="none" class="location">北京</navigator>
 	<!-- 切换 -->
 	<view class="tabs">
-		<text class="current">热映</text>
-		<text>待映</text>
+		<text
+		  class="{{ tabIndex === 'hots' ? 'current' : '' }}"
+		  bind:tap="switch"
+		  data-tab-index="hots"
+		>热映</text>
+		<text
+		  class="{{ tabIndex === 'plan' ? 'current' : '' }}"
+		  bind:tap="switch"
+		  data-tab-index="plan"
+		>待映</text>
 	</view>
 	<!-- 搜索 -->
 	<navigator url="./index" hover-class="none" class="search"></navigator>
 </view>
 
 <!-- 电影列表 热映 -->
-<view class="items hots" hidden="{{false}}">
+<view class="items hots" hidden="{{tabIndex !== 'hots'}}">
 	<navigator url="./detail">
 		<view class="item">
 			<!-- 播放按钮 -->
@@ -226,7 +234,7 @@
 </view>
 
 <!-- 电影列表 待映 -->
-<view class="items-wrap" hidden="{{true}}">
+<view class="items-wrap" hidden="{{tabIndex !== 'plan'}}">
 	<text class="title">近期最受欢迎</text>
 	<scroll-view scroll-x>
 		<view class="cell">
